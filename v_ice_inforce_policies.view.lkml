@@ -11,6 +11,12 @@ view: v_ice_inforce_policies {
     sql: ${TABLE}.inforce_7_days_ago ;;
   }
 
+  dimension: inforce_14_days_ago {
+    type: number
+    sql: ${TABLE}.inforce_14_days_ago ;;
+  }
+
+
   dimension: inforce_30_days_ago {
     type: number
     sql: ${TABLE}.inforce_30_days_ago ;;
