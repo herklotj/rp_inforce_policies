@@ -42,4 +42,5 @@ FROM lk_h_policy_history_scored
     sql: ${TABLE}.inforce_14_days_ago_cts ;;
   }
 
+
 }
