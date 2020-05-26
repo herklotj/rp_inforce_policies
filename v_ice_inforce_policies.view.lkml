@@ -6,14 +6,14 @@ view: v_ice_inforce_policies {
     sql: ${TABLE}.inforce_yesterday ;;
   }
 
-  dimension: inforce_7_days_ago {
+  dimension: inforce_8_days_ago {
     type: number
-    sql: ${TABLE}.inforce_7_days_ago ;;
+    sql: ${TABLE}.inforce_8_days_ago ;;
   }
 
-  dimension: inforce_14_days_ago {
+  dimension: inforce_15_days_ago {
     type: number
-    sql: ${TABLE}.inforce_14_days_ago ;;
+    sql: ${TABLE}.inforce_15_days_ago ;;
   }
 
 
