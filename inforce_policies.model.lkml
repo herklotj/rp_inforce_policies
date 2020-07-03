@@ -17,3 +17,5 @@ explore: v_ice_inforce_policies {}
 explore: lk_h_policy_history_scored {}
 
 explore: union_motor_home {}
+
+explore: lk_m_policy_history {}
