@@ -2,9 +2,6 @@ view: lk_home_motor_union {
   derived_table: {
     sql:
 
-
-
-
 SELECT sum(broker_count_fy17) as broker_count_fy17,
 sum(broker_count_fy18) as broker_count_fy18,
 sum(broker_count_fy19) as broker_count_fy19,
@@ -56,7 +53,11 @@ FROM lk_h_policy_history_scored
 
 ) a
 
-     ;;
+
+
+
+
+                 ;;
   }
 
   dimension: broker_count_fy17 {
@@ -79,15 +80,16 @@ FROM lk_h_policy_history_scored
     sql: ${TABLE}.broker_count_fy20 ;;
   }
 
-  dimension: broker_count_home_cts_fy21_to_date {
+  dimension: broker_count_fy21_to_date {
     type: number
-    sql: ${TABLE}.broker_count_home_cts_fy21_to_date ;;
+    sql: ${TABLE}.broker_count_fy21_to_date ;;
   }
 
-  dimension: broker_count_home_cts_latest_12_months {
+  dimension: broker_count_latest_12_months {
     type: number
-    sql: ${TABLE}.broker_count_home_cts_latest_12_months ;;
+    sql: ${TABLE}.broker_count_latest_12_months ;;
   }
+
 
 
 
