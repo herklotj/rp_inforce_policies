@@ -31,27 +31,27 @@ FROM lk_m_policy_history
     sql: ${TABLE}.inforce_15_days_ago_motor_broker ;;
   }
 
-  dimension: broker_count_motor_FY17 {
+  dimension: broker_count_motor_Financial_Year_17 {
     type: number
     sql: ${TABLE}.broker_count_motor_fy17 ;;
   }
 
-  dimension: broker_count_motor_FY18 {
+  dimension: broker_count_motor_Financial_Year_18 {
     type: number
     sql: ${TABLE}.broker_count_motor_fy18 ;;
   }
 
-  dimension: broker_count_motor_FY19 {
+  dimension: broker_count_motor_Financial_Year_19 {
     type: number
     sql: ${TABLE}.broker_count_motor_fy19 ;;
   }
 
-  dimension: broker_count_motor_FY20 {
+  dimension: broker_count_motor_Financial_Year_20 {
     type: number
     sql: ${TABLE}.broker_count_motor_fy20 ;;
   }
 
-  dimension: broker_count_motor_FY21_to_date {
+  dimension: broker_count_motor_Financial_Year_21_to_date {
     type: number
     sql: ${TABLE}.broker_count_motor_fy21_to_date ;;
   }
