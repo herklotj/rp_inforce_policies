@@ -9,7 +9,8 @@ SUM(CASE WHEN schedule_cover_start_dttm = annual_cover_start_dttm  AND '2016-02-
 SUM(CASE WHEN schedule_cover_start_dttm = annual_cover_start_dttm  AND '2017-02-01' <= annual_cover_start_dttm  AND annual_cover_start_dttm <= '2018-01-31' AND schedule_cover_start_dttm < schedule_cover_end_dttm AND cfi_ind = 0 AND broker_ind = 1 then 1 else 0 end) as broker_count_motor_fy18,
 SUM(CASE WHEN schedule_cover_start_dttm = annual_cover_start_dttm  AND '2018-02-01' <= annual_cover_start_dttm  AND annual_cover_start_dttm <= '2019-01-31' AND schedule_cover_start_dttm < schedule_cover_end_dttm AND cfi_ind = 0 AND broker_ind = 1 then 1 else 0 end) as broker_count_motor_fy19,
 SUM(CASE WHEN schedule_cover_start_dttm = annual_cover_start_dttm  AND '2019-02-01' <= annual_cover_start_dttm  AND annual_cover_start_dttm <= '2020-01-31' AND schedule_cover_start_dttm < schedule_cover_end_dttm AND cfi_ind = 0 AND broker_ind = 1 then 1 else 0 end) as broker_count_motor_fy20,
-SUM(CASE WHEN schedule_cover_start_dttm = annual_cover_start_dttm  AND '2020-02-01' <= annual_cover_start_dttm  AND annual_cover_start_dttm <= '2021-01-31' AND schedule_cover_start_dttm < schedule_cover_end_dttm AND cfi_ind = 0 AND broker_ind = 1 then 1 else 0 end) as broker_count_motor_fy21
+SUM(CASE WHEN schedule_cover_start_dttm = annual_cover_start_dttm  AND '2020-02-01' <= annual_cover_start_dttm  AND annual_cover_start_dttm < TIMESTAMP(to_date(sysdate)) AND schedule_cover_start_dttm < schedule_cover_end_dttm AND cfi_ind = 0 AND broker_ind = 1 then 1 else 0 end) as broker_count_motor_fy21_to_date,
+SUM(CASE WHEN schedule_cover_start_dttm = annual_cover_start_dttm  AND timestamp(add_months( to_date(sysdate), -12 )) <= annual_cover_start_dttm  AND annual_cover_start_dttm < TIMESTAMP(to_date(sysdate)) AND schedule_cover_start_dttm < schedule_cover_end_dttm AND cfi_ind = 0 AND broker_ind = 1 then 1 else 0 end) as broker_count_motor_latest_12_months
 FROM lk_m_policy_history
 
            ;;
@@ -50,10 +51,18 @@ FROM lk_m_policy_history
     sql: ${TABLE}.broker_count_motor_fy20 ;;
   }
 
-  dimension: broker_count_motor_fy21 {
+  dimension: broker_count_motor_fy21_to_date {
     type: number
-    sql: ${TABLE}.broker_count_motor_fy21 ;;
+    sql: ${TABLE}.broker_count_motor_fy21_to_date ;;
   }
+
+  dimension: broker_count_motor_latest_12_months {
+    type: number
+    sql: ${TABLE}.broker_count_motor_latest_12_months ;;
+  }
+
+
+
 
 
 }
