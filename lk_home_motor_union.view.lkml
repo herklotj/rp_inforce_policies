@@ -49,7 +49,7 @@ SUM(CASE WHEN schedule_cover_start_dttm = annual_cover_start_dttm  AND '2018-02-
 SUM(CASE WHEN schedule_cover_start_dttm = annual_cover_start_dttm  AND '2019-02-01' <= annual_cover_start_dttm  AND annual_cover_start_dttm < '2020-02-01' AND schedule_cover_start_dttm < schedule_cover_end_dttm AND cfi_ind = 0 AND (broker_ind_cts = 1) then 1 else 0 end) as broker_count_fy20,
 SUM(CASE WHEN schedule_cover_start_dttm = annual_cover_start_dttm  AND '2020-02-01' <= annual_cover_start_dttm  AND annual_cover_start_dttm < TIMESTAMP(to_date(sysdate)) AND schedule_cover_start_dttm < schedule_cover_end_dttm AND cfi_ind = 0 AND broker_ind_cts = 1 then 1 else 0 end) as broker_count_home_cts_fy21_to_date,
 SUM(CASE WHEN schedule_cover_start_dttm = annual_cover_start_dttm  AND timestamp(add_months( to_date(sysdate), -12 )) <= annual_cover_start_dttm  AND annual_cover_start_dttm < TIMESTAMP(to_date(sysdate)) AND schedule_cover_start_dttm < schedule_cover_end_dttm AND cfi_ind = 0 AND broker_ind_cts = 1 then 1 else 0 end) as broker_count_home_cts_latest_12_months
-FROM lk_h_policy_history_scored
+FROM lk_h_policy_history_scored       -------- contents
 
 ) a
 
