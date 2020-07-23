@@ -10,8 +10,6 @@ datagroup: inforce_policies_default_datagroup {
 
 persist_with: inforce_policies_default_datagroup
 
-explore: v_inforce_policies {}
-
 explore: v_ice_inforce_policies {}
 
 explore: lk_h_policy_history_scored {}
