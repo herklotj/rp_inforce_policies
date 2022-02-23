@@ -3,8 +3,8 @@ view: motor_reinsurance_gwp {
     sql:
 
     SELECT
-CASE WHEN substr (policy_reference_number,6,1) = 1 THEN '103'
-WHEN substr (policy_reference_number,6,1) = 2 THEN '173'
+CASE WHEN substr (polnum,6,1) = 1 THEN '103'
+WHEN substr (polnum,6,1) = 2 THEN '173'
 ELSE '102' END AS scheme,
 SUM(CASE WHEN policy_reference_number IS NULL THEN act_gross_premium_net_commission_txd_amt_nb ELSE act_gross_premium_net_commission_txd_amt_nb + act_gross_premium_net_commission_txd_amt_mta end) as inforce_yesterday_gwp
 
@@ -42,8 +42,8 @@ ON a.polnum = b.policy_reference_number
 
 
 GROUP BY
-CASE WHEN substr (policy_reference_number,6,1) = 1 THEN '103'
-WHEN substr (policy_reference_number,6,1) = 2 THEN '173'
+CASE WHEN substr (polnum,6,1) = 1 THEN '103'
+WHEN substr (polnum,6,1) = 2 THEN '173'
 ELSE '102' END
 
 
