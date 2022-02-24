@@ -2,7 +2,7 @@ view: motor_reinsurance_gwp {
   derived_table: {
     sql:
 
-    SELECT
+   SELECT
 polnum,
 CASE WHEN substr (polnum,6,1) = 1 THEN '103'
 WHEN substr (polnum,6,1) = 2 THEN '173'
@@ -37,7 +37,7 @@ SELECT policy_reference_number, max(to_date(transaction_period_start_date)), max
 FROM ice_aa_policy_summary
 WHERE policy_transaction_type IN ('MID_TERM_ADJUSTMENT', 'MID_TERM_ADJUSTMENT_TEMPORARY')
 GROUP BY policy_reference_number
-HAVING SUM(CASE WHEN to_date (transaction_period_start_date) <= to_date (sysdate) -1 AND to_date (transaction_period_end_date) >= to_date (sysdate) -1 AND policy_transaction_type IN ('MID_TERM_ADJUSTMENT') THEN 1 ELSE 0 END) = 1
+HAVING SUM(CASE WHEN to_date (transaction_period_start_date) <= to_date (sysdate) -1 AND to_date (transaction_period_end_date) >= to_date (sysdate) -1 AND policy_transaction_type IN ('MID_TERM_ADJUSTMENT', 'MID_TERM_ADJUSTMENT_TEMPORARY') THEN 1 ELSE 0 END) >= 1
 
 ) b
 
@@ -47,7 +47,6 @@ ON a.polnum = b.policy_reference_number
 LEFT JOIN qs_cover c ON (CASE WHEN policy_reference_number IS NULL THEN insurerquoteref ELSE insurerquoterefmta end) = c.quote_id
 LEFT JOIN qs_drivers d ON (CASE WHEN policy_reference_number IS NULL THEN insurerquoteref ELSE insurerquoterefmta end) = d.quote_id AND d.driver_id = 0
 LEFT JOIN qs_vehicles v ON (CASE WHEN policy_reference_number IS NULL THEN insurerquoteref ELSE insurerquoterefmta end) = v.quote_id and v.vehicle_id = 1
-
 
 
 
