@@ -3,10 +3,15 @@ view: motor_reinsurance_gwp {
     sql:
 
     SELECT
+polnum,
 CASE WHEN substr (polnum,6,1) = 1 THEN '103'
 WHEN substr (polnum,6,1) = 2 THEN '173'
 ELSE '102' END AS scheme,
-SUM(CASE WHEN policy_reference_number IS NULL THEN act_gross_premium_net_commission_txd_amt_nb ELSE act_gross_premium_net_commission_txd_amt_nb + act_gross_premium_net_commission_txd_amt_mta end) as inforce_yesterday_gwp
+CASE WHEN d.birth_dt IS NULL then NULL ELSE int( Months_between(to_date(c.cover_start_dt), to_date(d.birth_dt)) / 12 ) end as ph_age,
+ncb_years as ph_ncd,
+vehicle_value_amount,
+CASE WHEN policy_reference_number IS NULL THEN act_gross_premium_net_commission_txd_amt_nb ELSE act_gross_premium_net_commission_txd_amt_nb + act_gross_premium_net_commission_txd_amt_mta end as act_gross_premium_net_commission_txd_amt
+
 
 
 FROM
@@ -39,25 +44,47 @@ HAVING SUM(CASE WHEN to_date (transaction_period_start_date) <= to_date (sysdate
 
 ON a.polnum = b.policy_reference_number
 
+LEFT JOIN qs_cover c ON (CASE WHEN policy_reference_number IS NULL THEN insurerquoteref ELSE insurerquoterefmta end) = c.quote_id
+LEFT JOIN qs_drivers d ON (CASE WHEN policy_reference_number IS NULL THEN insurerquoteref ELSE insurerquoterefmta end) = d.quote_id AND d.driver_id = 0
+LEFT JOIN qs_vehicles v ON (CASE WHEN policy_reference_number IS NULL THEN insurerquoteref ELSE insurerquoterefmta end) = v.quote_id and v.vehicle_id = 1
 
 
-GROUP BY
-CASE WHEN substr (polnum,6,1) = 1 THEN '103'
-WHEN substr (polnum,6,1) = 2 THEN '173'
-ELSE '102' END
 
 
                  ;;
   }
 
-  dimension: inforce_yesterday_gwp {
+  measure: inforce_yesterday_gwp {
     type: number
-    sql: round(${TABLE}.inforce_yesterday_gwp, 2) ;;
+    sql: sum(act_gross_premium_net_commission_txd_amt) ;;
   }
 
   dimension: scheme {
     type: string
     sql: ${TABLE}.scheme ;;
+  }
+
+  dimension: ph_age_flag {
+    type: string
+    sql: CASE WHEN ph_age >= 17 AND ph_age <= 20 then '17-20'
+         WHEN ph_age >= 21 AND ph_age <= 24 then '21-24'
+         ELSE 'Other' end  ;;
+  }
+
+
+  dimension: ncd_flag {
+    type: string
+    sql: CASE WHEN ph_ncd >= 0 AND ph_ncd <= 1 then '0-1'
+         WHEN ph_ncd >= 9 then '9+'
+         ELSE 'Other' end   ;;
+  }
+
+
+  dimension: vehicle_value_flag {
+    type: string
+    sql: CASE WHEN vehicle_value_amount > 50000 AND vehicle_value_amount =< 75000 then '50k - 70k'
+         WHEN vehicle_value_amount > 75000 AND vehicle_value_amount =< 100000 then '75k - 100k'
+         WHEN vehicle_value_amount > 100000 then '100k +' end;;
   }
 
 }
