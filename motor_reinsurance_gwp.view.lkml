@@ -86,8 +86,8 @@ LEFT JOIN qs_vehicles v ON (CASE WHEN policy_reference_number IS NULL THEN insur
 
   dimension: vehicle_value_flag {
     type: string
-    sql: CASE WHEN vehicle_value_amount > 50000 AND vehicle_value_amount =< 75000 then '50k - 70k'
-         WHEN vehicle_value_amount > 75000 AND vehicle_value_amount =< 100000 then '75k - 100k'
+    sql: CASE WHEN vehicle_value_amount > 50000 AND vehicle_value_amount <= 75000 then '50k - 70k'
+         WHEN vehicle_value_amount > 75000 AND vehicle_value_amount <= 100000 then '75k - 100k'
          WHEN vehicle_value_amount > 100000 then '100k +' ELSE 'Other' end;;
   }
 
