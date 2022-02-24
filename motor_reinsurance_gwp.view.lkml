@@ -58,6 +58,11 @@ LEFT JOIN qs_vehicles v ON (CASE WHEN policy_reference_number IS NULL THEN insur
     sql: sum(act_gross_premium_net_commission_txd_amt) ;;
   }
 
+  measure: total {
+    type: number
+    sql: count(*) ;;
+  }
+
   dimension: scheme {
     type: string
     sql: ${TABLE}.scheme ;;
