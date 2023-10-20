@@ -21,3 +21,4 @@ explore: lk_m_policy_history {}
 explore: lk_home_motor_union {}
 
 explore: motor_reinsurance_gwp {}
+explore: v_ice_inforce_policies_withrows {}
