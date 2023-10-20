@@ -1,7 +1,7 @@
 view: v_ice_inforce_policies_withrows {
   derived_table: {
-    sql:
-    select *,row_number() over (order by scheme) as row_no from v_ice_inforce_policies
+    sql:select * from (
+    select *,row_number() over (order by scheme) as row_no from v_ice_inforce_policies)
     ;;
   }
 
