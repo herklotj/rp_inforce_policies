@@ -1,8 +1,14 @@
 view: v_ice_reserving_premium_vectors {
   derived_table: {
     sql:select * from (
-          select *,cast((row_number() over (order by uw_year, fuw_year, scheme, acc_month ASC)) as varchar) as row_no from v_ice_reserving_premium_vectors) a
+          select *, '999' as row_join_key, cast((row_number() over (order by uw_year, fuw_year, scheme, acc_month ASC)) as varchar) as row_no from v_ice_reserving_premium_vectors) a
           ;;
+  }
+
+  dimension: row_join_key {
+    type: string
+    sql: ${TABLE}.row_join_key;;
+
   }
 
   dimension: row_no {
