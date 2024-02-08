@@ -22,3 +22,4 @@ explore: lk_home_motor_union {}
 
 explore: motor_reinsurance_gwp {}
 explore: v_ice_inforce_policies_withrows {}
+explore: v_ice_reserving_premium_vectors {}
