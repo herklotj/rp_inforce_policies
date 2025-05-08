@@ -1,4 +1,4 @@
-connection: "echo_aapricing"
+connection: "av2"
 
 # include all the views
 include: "*.view"
@@ -24,3 +24,5 @@ explore: motor_reinsurance_gwp {}
 explore: v_ice_inforce_policies_withrows {}
 explore: v_ice_reserving_premium_vectors {}
 explore: v_ice_reserving_premium_vectors_for_overall {}
+explore: v_ice_inforce_policies_lkr {persist_for: "24 hours"}
+explore: ice_aa_policy_summary {persist_for: "24 hours"}
