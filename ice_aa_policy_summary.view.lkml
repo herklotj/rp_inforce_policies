@@ -50,6 +50,171 @@ view: ice_aa_policy_summary {
     sql: SUM(CASE WHEN to_date (transaction_period_start_date) <= to_date (sysdate) -30 AND to_date (transaction_period_end_date) >= to_date (sysdate) -30 AND policy_transaction_type IN ('NEW_BUSINESS','RENEWAL_ACCEPT') THEN 1 WHEN to_date (transaction_period_start_date) <= to_date (sysdate) -30 AND to_date (transaction_period_end_date) >= to_date (sysdate) -30 AND policy_transaction_type = 'CANCELLATION' THEN -1 ELSE 0 END) ;;
     value_format: "#,##0"
   }
+
+  measure: inforce_at_end_of_last_month{
+    label: "Last Month"
+    type: number
+    sql: SUM(CASE WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -1, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -1, to_date (sysdate))) AND policy_transaction_type IN ('NEW_BUSINESS','RENEWAL_ACCEPT')
+         THEN 1
+         WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -1, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -1, to_date (sysdate))) AND policy_transaction_type = 'CANCELLATION'
+         THEN -1
+        ELSE 0 END) ;;
+    value_format: "#,##0"
+  }
+
+  measure: inforce_2_months_ago{
+    label: "2 Months Ago"
+    type: number
+    sql: SUM(CASE WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -2, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -2, to_date (sysdate))) AND policy_transaction_type IN ('NEW_BUSINESS','RENEWAL_ACCEPT')
+         THEN 1
+         WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -2, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -2, to_date (sysdate))) AND policy_transaction_type = 'CANCELLATION'
+         THEN -1
+        ELSE 0 END) ;;
+    value_format: "#,##0"
+  }
+
+  measure: inforce_3_months_ago{
+    label: "3 Months Ago"
+    type: number
+    sql: SUM(CASE WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -3, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -3, to_date (sysdate))) AND policy_transaction_type IN ('NEW_BUSINESS','RENEWAL_ACCEPT')
+         THEN 1
+         WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -3, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -3, to_date (sysdate))) AND policy_transaction_type = 'CANCELLATION'
+         THEN -1
+        ELSE 0 END) ;;
+    value_format: "#,##0"
+  }
+
+  measure: inforce_4_months_ago{
+    label: "4 Months Ago"
+    type: number
+    sql: SUM(CASE WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -4, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -4, to_date (sysdate))) AND policy_transaction_type IN ('NEW_BUSINESS','RENEWAL_ACCEPT')
+         THEN 1
+         WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -4, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -4, to_date (sysdate))) AND policy_transaction_type = 'CANCELLATION'
+         THEN -1
+        ELSE 0 END) ;;
+    value_format: "#,##0"
+  }
+
+  measure: inforce_5_months_ago{
+    label: "5 Months Ago"
+    type: number
+    sql: SUM(CASE WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -5, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -5, to_date (sysdate))) AND policy_transaction_type IN ('NEW_BUSINESS','RENEWAL_ACCEPT')
+         THEN 1
+         WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -5, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -5, to_date (sysdate))) AND policy_transaction_type = 'CANCELLATION'
+         THEN -1
+        ELSE 0 END) ;;
+    value_format: "#,##0"
+  }
+
+  measure: inforce_6_months_ago{
+    label: "6 Months Ago"
+    type: number
+    sql: SUM(CASE WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -6, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -6, to_date (sysdate))) AND policy_transaction_type IN ('NEW_BUSINESS','RENEWAL_ACCEPT')
+         THEN 1
+         WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -6, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -6, to_date (sysdate))) AND policy_transaction_type = 'CANCELLATION'
+         THEN -1
+        ELSE 0 END) ;;
+    value_format: "#,##0"
+  }
+
+  measure: inforce_7_months_ago{
+    label: "7 Months Ago"
+    type: number
+    sql: SUM(CASE WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -7, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -7, to_date (sysdate))) AND policy_transaction_type IN ('NEW_BUSINESS','RENEWAL_ACCEPT')
+         THEN 1
+         WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -7, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -7, to_date (sysdate))) AND policy_transaction_type = 'CANCELLATION'
+         THEN -1
+        ELSE 0 END) ;;
+    value_format: "#,##0"
+  }
+
+
+  measure: inforce_8_months_ago{
+    label: "8 Months Ago"
+    type: number
+    sql: SUM(CASE WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -8, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -8, to_date (sysdate))) AND policy_transaction_type IN ('NEW_BUSINESS','RENEWAL_ACCEPT')
+         THEN 1
+         WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -8, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -8, to_date (sysdate))) AND policy_transaction_type = 'CANCELLATION'
+         THEN -1
+        ELSE 0 END) ;;
+    value_format: "#,##0"
+  }
+
+
+  measure: inforce_9_months_ago{
+    label: "9 Months Ago"
+    type: number
+    sql: SUM(CASE WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -9, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -9, to_date (sysdate))) AND policy_transaction_type IN ('NEW_BUSINESS','RENEWAL_ACCEPT')
+         THEN 1
+         WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -9, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -9, to_date (sysdate))) AND policy_transaction_type = 'CANCELLATION'
+         THEN -1
+        ELSE 0 END) ;;
+    value_format: "#,##0"
+  }
+
+
+  measure: inforce_10_months_ago{
+    label: "10 Months Ago"
+    type: number
+    sql: SUM(CASE WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -10, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -10, to_date (sysdate))) AND policy_transaction_type IN ('NEW_BUSINESS','RENEWAL_ACCEPT')
+         THEN 1
+         WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -10, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -10, to_date (sysdate))) AND policy_transaction_type = 'CANCELLATION'
+         THEN -1
+        ELSE 0 END) ;;
+    value_format: "#,##0"
+  }
+
+
+  measure: inforce_11_months_ago{
+    label: "11 Months Ago"
+    type: number
+    sql: SUM(CASE WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -11, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -11, to_date (sysdate))) AND policy_transaction_type IN ('NEW_BUSINESS','RENEWAL_ACCEPT')
+         THEN 1
+         WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -11, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -11, to_date (sysdate))) AND policy_transaction_type = 'CANCELLATION'
+         THEN -1
+        ELSE 0 END) ;;
+    value_format: "#,##0"
+  }
+
+
+  measure: inforce_12_months_ago{
+    label: "12 Months Ago"
+    type: number
+    sql: SUM(CASE WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -12, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -12, to_date (sysdate))) AND policy_transaction_type IN ('NEW_BUSINESS','RENEWAL_ACCEPT')
+         THEN 1
+         WHEN to_date (transaction_period_start_date) <= LAST_DAY(DATEADD(MONTH, -12, to_date (sysdate)))
+         AND to_date (transaction_period_end_date) >= LAST_DAY(DATEADD(MONTH, -12, to_date (sysdate))) AND policy_transaction_type = 'CANCELLATION'
+         THEN -1
+        ELSE 0 END) ;;
+    value_format: "#,##0"
+  }
+
+
+
+
   ## # You can specify the table name if it's different from the view name:
   # sql_table_name: my_schema_name.tester ;;
   #
